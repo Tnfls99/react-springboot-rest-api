@@ -1,8 +1,8 @@
 package com.prgrms.clone.cloneproject.product.repository;
 
 import com.prgrms.clone.cloneproject.product.domain.Product;
-import com.prgrms.clone.cloneproject.product.util.Category;
-import com.prgrms.clone.cloneproject.product.util.Color;
+import com.prgrms.clone.cloneproject.product.domain.util.Category;
+import com.prgrms.clone.cloneproject.product.domain.util.Color;
 import com.prgrms.clone.cloneproject.product.repository.util.ProductSql;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

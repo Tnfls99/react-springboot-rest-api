@@ -1,4 +1,4 @@
-package com.prgrms.clone.cloneproject.product.util;
+package com.prgrms.clone.cloneproject.product.domain.util;
 
 public enum Category {
     OUTER(),

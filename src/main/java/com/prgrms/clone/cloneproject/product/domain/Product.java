@@ -1,7 +1,7 @@
 package com.prgrms.clone.cloneproject.product.domain;
 
-import com.prgrms.clone.cloneproject.product.util.Category;
-import com.prgrms.clone.cloneproject.product.util.Color;
+import com.prgrms.clone.cloneproject.product.domain.util.Category;
+import com.prgrms.clone.cloneproject.product.domain.util.Color;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
