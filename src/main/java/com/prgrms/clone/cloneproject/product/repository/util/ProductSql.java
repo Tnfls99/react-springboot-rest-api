@@ -1,4 +1,4 @@
-package com.prgrms.clone.cloneproject.repository.util;
+package com.prgrms.clone.cloneproject.product.repository.util;
 
 public class ProductSql {
 

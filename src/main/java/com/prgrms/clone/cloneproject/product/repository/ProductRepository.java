@@ -1,6 +1,6 @@
-package com.prgrms.clone.cloneproject.repository;
+package com.prgrms.clone.cloneproject.product.repository;
 
-import com.prgrms.clone.cloneproject.domain.Product;
+import com.prgrms.clone.cloneproject.product.domain.Product;
 
 import java.util.List;
 import java.util.Optional;

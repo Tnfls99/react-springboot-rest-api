@@ -1,9 +1,9 @@
-package com.prgrms.clone.cloneproject.repository;
+package com.prgrms.clone.cloneproject.product.repository;
 
-import com.prgrms.clone.cloneproject.domain.Product;
-import com.prgrms.clone.cloneproject.domain.util.Category;
-import com.prgrms.clone.cloneproject.domain.util.Color;
-import com.prgrms.clone.cloneproject.repository.util.ProductSql;
+import com.prgrms.clone.cloneproject.product.domain.Product;
+import com.prgrms.clone.cloneproject.product.util.Category;
+import com.prgrms.clone.cloneproject.product.util.Color;
+import com.prgrms.clone.cloneproject.product.repository.util.ProductSql;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;

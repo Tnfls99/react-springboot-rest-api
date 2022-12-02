@@ -1,7 +1,8 @@
 package com.prgrms.clone.cloneproject.domain;
 
-import com.prgrms.clone.cloneproject.domain.util.Category;
-import com.prgrms.clone.cloneproject.domain.util.Color;
+import com.prgrms.clone.cloneproject.product.util.Category;
+import com.prgrms.clone.cloneproject.product.util.Color;
+import com.prgrms.clone.cloneproject.product.domain.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

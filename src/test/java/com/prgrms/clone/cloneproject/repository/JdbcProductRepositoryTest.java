@@ -1,9 +1,10 @@
 package com.prgrms.clone.cloneproject.repository;
 
 import com.prgrms.clone.cloneproject.TestConfig;
-import com.prgrms.clone.cloneproject.domain.Product;
-import com.prgrms.clone.cloneproject.domain.util.Category;
-import com.prgrms.clone.cloneproject.domain.util.Color;
+import com.prgrms.clone.cloneproject.product.domain.Product;
+import com.prgrms.clone.cloneproject.product.repository.JdbcProductRepository;
+import com.prgrms.clone.cloneproject.product.util.Category;
+import com.prgrms.clone.cloneproject.product.util.Color;
 import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.config.MysqldConfig;
 import org.junit.jupiter.api.*;
