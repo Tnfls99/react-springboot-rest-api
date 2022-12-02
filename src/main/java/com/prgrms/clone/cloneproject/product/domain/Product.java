@@ -18,12 +18,12 @@ public class Product {
     private final Integer price;
     private final Color color;
     private final LocalDateTime registeredAt;
-    private final Boolean isMade;
 
     private Integer id;
     private String name;
     private Integer stock;
     private String imageUrl;
+    private Boolean isMade;
 
     public Product(Integer id, String name, Category category, Integer price, Color color, Integer stock, Boolean isMade, LocalDateTime registeredAt, String imageUrl) {
         validateName(name);
@@ -113,12 +113,20 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && category == product.category && Objects.equals(price, product.price) && color == product.color && Objects.equals(stock, product.stock);
+        return category == product.category
+                && Objects.equals(price, product.price)
+                && color == product.color
+                && Objects.equals(registeredAt, product.registeredAt)
+                && Objects.equals(id, product.id)
+                && Objects.equals(name, product.name)
+                && Objects.equals(stock, product.stock)
+                && Objects.equals(imageUrl, product.imageUrl)
+                && Objects.equals(isMade, product.isMade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, price, color, stock);
+        return Objects.hash(category, price, color, registeredAt, id, name, stock, imageUrl, isMade);
     }
 
     private void validatePrice(Integer price) {

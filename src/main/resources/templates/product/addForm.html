@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+
+        .container {
+            max-width: 650px;
+        }
+
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body class="web-font">
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>< 상품 등록하기 ></h2></div>
+    <h2 class="mb-3">상품 정보를 입력해주세요! ଘ(੭ˊᵕˋ)੭* ੈ✩‧₊˚</h2>
+    <p>모든 입력 정보를 입력하셔야 상품이 정상적으로 등록됩니다!</p>
+    <hr class="my-4">
+    <form action="list.html" th:action th:object="${productDTO}" method="post">
+        <div>
+            <div>
+                <div>
+                    <h4>상품 이름</h4>
+                </div>
+                <div>
+                    <input type="text" id="name" name="name" class="form-control" th:field="*{name}"
+                           placeholder="반드시 입력">
+                </div>
+            </div>
+            <div class="mt-5">
+                <div>
+                    <h4>상품 가격</h4>
+                </div>
+                <div>
+                    <input type="text" id="price" name="price" class="form-control" th:field="*{price}"
+                           placeholder="반드시 입력">
+                </div>
+            </div>
+            <div class="mt-5">
+                <div>
+                    <h4>상품 색상</h4>
+                </div>
+                <div>
+                    <select class="form-select" name="color" th:field="*{color}">
+                        <option value="">=== 색상 선택 ===</option>
+                        <option th:each="colors : ${colors}" th:value="${colors}" th:text="${colors}">
+                    </select>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div>
+                    <h4>상품 카테고리</h4>
+                </div>
+                <div>
+                    <select class="form-select" name="category" th:field="*{category}">
+                        <option value="">=== 카테고리 선택 ===</option>
+                        <option th:each="categories : ${categories}" th:value="${categories}" th:text="${categories}">
+                    </select>
+                </div>
+            </div>
+            <div class="mt-5">
+                <div>
+                    <h4>재고</h4>
+                </div>
+                <div>
+                    <input type="text" id="stock" name="stock" class="form-control" th:field="*{stock}"
+                           placeholder="반드시 입력">
+                </div>
+            </div>
+            <div class="mt-5">
+                <div>
+                    <h4>이미지</h4>
+                </div>
+                <div>
+                    <input type="text" id="image_url" name="image-url" class="form-control-file" th:field="*{imageUrl}"
+                           placeholder="반드시 입력">
+                </div>
+            </div>
+            <div class="mt-5">
+                <div>
+                    <h4>IS as''on made?</h4>
+                    <p>메이드 상품이라면 [true]를 클릭해주세요.</p>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <input type="radio" name="is_made" value="true" th:field="*{isMade}">TRUE
+                    </div>
+                    <div class="col-3">
+                        <input type="radio" name="is_made" value="false" th:field="*{isMade}">FALSE
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row mt-5">
+            <div class="col">
+                <button class="w-100 btn btn-dark btn-lg" type="submit">상품 등록</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-outline-secondary btn-lg"
+                        onclick="location.href='list.html'"
+                        th:onclick="|location.href='@{/product/list}'|" type="button">취소
+                </button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>

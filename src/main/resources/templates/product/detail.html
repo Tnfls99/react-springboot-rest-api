@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/font.css}" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+    </style>
+</head>
+<body class="web-font">
+<div class="container-fluid">
+    <div class="row mt-5">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2  bg-light sidebar ">
+            <div class="position-sticky pt-3 sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <span data-feather="home" class="align-text-bottom"></span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            Orders
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="users" class="align-text-bottom"></span>
+                            Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                            Reports
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers" class="align-text-bottom"></span>
+                            Integrations
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                    <span>Saved reports</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle" class="align-text-bottom"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Current month
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Last quarter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Social engagement
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Year-end sale
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="row mb-5">
+                <div class="col-6 mt-5">
+                    <img class="img-fluid ml-5 mt-3" src="resources/IMG_9078.JPG"/>
+                </div>
+                <div class="col-6 mt-5">
+                    <div class="row mt-5">
+                        <h6 style="color: #686868">AS”ON SOLIO MUFFLER (BLACK)</h6>
+                    </div>
+                    <div class="row">
+                        <div>
+                            ₩32,000
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-4">
+                            <small style="size:5px">AS”ON SOLIO MUFFLER (BLACK)</small>
+                        </div>
+                        <div class="col-1">
+                            <input type="number" style="width: 30px" min="1" value="1">
+                        </div>
+                        <div class="col-1">
+                            ₩32,000
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-3">
+                            <button type="button" class="btn btn-outline-secondary"
+                                    style="width: 170px; height: 30px; font-size: 12px">WISH LIST
+                            </button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-outline-secondary"
+                                    style="width: 170px; height: 30px; font-size: 12px">CART
+                            </button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-outline-secondary"
+                                    style="width: 170px; height: 30px; font-size: 12px">BUY NOW
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button class="btn btn-outline-secondary"
+                                    style="width: 100%; height: 23px; font-size: 10px; text-align: left"
+                                    type="button" data-toggle="collapse" data-target="#delivery" aria-exanded="false"
+                                    aria-controls="delivery">
+                                Delivery
+                            </button>
+                            <div class="collapse" id="delivery">
+                                <div class="card card-body" style="font-size: 12px">
+                                    <span class="card-text" style="white-space: pre-line;">
+                                        배송비는 3,000원이며 주문 금액이 70,000원 이상은 무료 배송입니다.
+                                        산간벽지나 도서지방은 별도의 추가금액 2,500원을 지불하셔야 됩니다.
+
+                                        고객님께서 주문하신 상품은 입금 확인 후 배송해 드립니다. 다만, 상품 종류에 따라서 상품의 배송이 다소 지연될 수 있습니다. 지연되는 상품은 NOTICE 게시판의  '입고 지연 상품' 게시물에 기재해두었습니다.
+
+                                        평균 배송 기간은 2-7일(주말, 공휴일 제외)정도 소요되며 입고 지연 시 최대 2주까지 지연될 수 있습니다.
+                                        상품이 오래 지연될 시 나머지 상품을 부분 발송해드릴 예정입니다.
+                                        정확한 배송 일자는 Q&A 게시판, 입고 지연 상품 게시글, 배송 조회 서비스를 이용하시면 신속하게 전달 받을 수 있습니다.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <button class="btn btn-outline-secondary"
+                                    style="width: 100%; height: 23px; font-size: 10px; text-align: left"
+                                    type="button" data-toggle="collapse" data-target="#exchange" aria-exanded="false"
+                                    aria-controls="exchange">
+                                Exchange
+                            </button>
+                            <div class="collapse" id="exchange">
+                                <div class="card card-body" style="font-size: 12px">
+                                    <span class="card-text" style="white-space: pre-line;">
+                                        교환 반품이 불가한 경우
+                                        전자상거래 소비자 보호법에 규정되어 있는 소비자는 청약 후 또는 상품을 공급받은 날로부터 7일 이내에는 소비자의 귀책사유로 인한 상품의 멸실, 소비자 취급 부주의, 또는 훼손된 경우 등을 제외하고는 단순 변심으로 인한 청약 철회가 가능합니다.
+
+                                        - 상품 수령 후 영업일 기준 7일이 경과한 경우.
+                                        - 흰색 또는 흰색계열의 상품 또는 오염 및 훼손 된 상품.
+                                        -공정거래 표준약관 제 15조 2항에 의한 이용자의 사용 또는 일부 소비에 의하여 재화등의 가치가 현저히 감소한 경우.
+                                            (착용흔적, 오염, 냄새, 세탁한 상품, 택이 제거된 상품 포함)
+                                        - 세탁 후, 착용 후에 발견된 불량은 반품/교환 불가합니다.
+                                        제품의 초기 불량과 소비자 과실과의 책임소지가 불분명해 불가피하게 마련된 규정이오니 양해 부탁드립니다.
+                                        - 모니터 해상도에 따라 색상 차이가 있을 수 있기 때문에 불량으로 처리되지 않습니다.
+                                        - 실측사이즈는 측정방법에 따라 1-3CM 오차가 있을 수 있으며, 니트 상품은 소재 특성상 1-5CM 오차가 있을 수 있습니다.
+                                        이런 경우 불량으로 교환/반품 불가한 점 양해 부탁드립니다.
+                                        - 데님소재 및 컬러감이 강한 상품은 밝은 색상의 상품과 함께 착용시 이염의 가능성이 있는 점 주의 부탁드립니다.
+                                        - 제작과정에 따라 마감처리 미흡(실밥), 초크자국 등이 있을 수 있으며 불량으로 판단되지 않습니다.
+
+                                        ※ 고객님의 마음이 바뀌어 교환, 반품을 하실 경우 상품 반송 비용은 고객님께서 부담하셔야 합니다.
+                                        (색상 교환, 사이즈 교환 등 포함)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+</body>
+</html>
