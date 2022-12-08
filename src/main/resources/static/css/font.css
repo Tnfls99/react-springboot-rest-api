@@ -1,4 +1,9 @@
 .web-font{
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Gowun Batang', serif;
     color: black;
+}
+
+.sidebar-font{
+    font-family: 'Nanum Myeongjo', serif;
+    color: white;
 }
