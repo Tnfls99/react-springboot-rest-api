@@ -1,12 +1,21 @@
 package com.prgrms.clone.cloneproject.product.domain;
 
+import javax.validation.constraints.NotNull;
+
 public class ProductDTO {
+    @NotNull(message = "빈 값일 수 없습니다.")
     private String name;
+    @NotNull(message = "빈 값일 수 없습니다.")
     private Integer price;
+    @NotNull(message = "빈 값일 수 없습니다.")
     private String color;
+    @NotNull(message = "빈 값일 수 없습니다.")
     private String imageUrl;
+    @NotNull(message = "빈 값일 수 없습니다.")
     private Integer stock;
+    @NotNull(message = "빈 값일 수 없습니다.")
     private String category;
+    @NotNull(message = "빈 값일 수 없습니다.")
     private Boolean isMade;
 
 
@@ -75,7 +84,7 @@ public class ProductDTO {
         this.category = category;
     }
 
-    public void setMade(Boolean made) {
-        isMade = made;
+    public void setIsMade(Boolean isMade) {
+        this.isMade = isMade;
     }
 }

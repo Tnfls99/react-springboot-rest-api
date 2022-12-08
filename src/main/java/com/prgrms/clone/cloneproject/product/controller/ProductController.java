@@ -1,20 +1,20 @@
 package com.prgrms.clone.cloneproject.product.controller;
 
 import com.prgrms.clone.cloneproject.product.domain.Product;
-import com.prgrms.clone.cloneproject.product.domain.ProductDTO;
+import com.prgrms.clone.cloneproject.product.domain.ProductPutDTO;
 import com.prgrms.clone.cloneproject.product.service.ProductProvider;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
-import static com.prgrms.clone.cloneproject.product.domain.util.Category.getAllCategories;
-import static com.prgrms.clone.cloneproject.product.domain.util.Color.getAllColors;
-
-@Controller
+@RestController
 @RequestMapping("/shop")
 public class ProductController {
 
@@ -24,35 +24,36 @@ public class ProductController {
         this.productProvider = productProvider;
     }
 
-
     @GetMapping("/products")
-    public String getAllProduct(@RequestParam @Nullable String category, Model model){
-        List<Product> productList = productProvider.getAll(category);
-        model.addAttribute("products", productList);
-        return "product/list";
+    public ResponseEntity getAllProduct(@RequestParam @Nullable String category, @RequestParam @Nullable Boolean isMade) {
+        List<Product> productList = productProvider.getAll(category, isMade);
+        return ResponseEntity.ok().body(productList);
     }
 
     @GetMapping("/products/{productId}")
-    public String getOneProduct(@PathVariable Integer productId, Model model){
+    public ResponseEntity getOneProduct(@PathVariable Integer productId) {
         Product product = productProvider.getOne(productId);
 
-        model.addAttribute("product", product);
-        return "product/detail";
+        return ResponseEntity.ok().body(product);
     }
 
-    @GetMapping("/products/add")
-    public String addProduct(Model model){
-        model.addAttribute("categories", getAllCategories());
-        model.addAttribute("colors", getAllColors());
-        model.addAttribute("productDTO", new ProductDTO());
-        return "product/addForm";
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable Integer productId) {
+        productProvider.delete(productId);
+
+        return ResponseEntity.status(HttpStatus.OK).body("상품이 삭제되었습니다.");
     }
 
-    @PostMapping("/products/add")
-    public String saveProduct(@ModelAttribute ProductDTO productDTO, RedirectAttributes redirectAttributes, Model model){
-        Product newProduct = productProvider.save(productDTO);
-        redirectAttributes.addAttribute("productId", newProduct.getId());
+    @PutMapping("/products/{productId}")
+    public ResponseEntity updateProductName(@RequestBody @Valid ProductPutDTO productPutDTO, @PathVariable Integer productId, UriComponentsBuilder uriComponentsBuilder) {
+        productProvider.update(productId, productPutDTO);
 
-        return "redirect:shop/products/{productId}";
+        URI location = uriComponentsBuilder.path("/shop/products/{productId}")
+                .buildAndExpand(productId).toUri();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+
+        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).headers(headers).body("상품 이름이 변경되었습니다.");
     }
 }

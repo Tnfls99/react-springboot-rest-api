@@ -3,21 +3,17 @@ package com.prgrms.clone.cloneproject.product.domain;
 import com.prgrms.clone.cloneproject.product.domain.util.Category;
 import com.prgrms.clone.cloneproject.product.domain.util.Color;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class Product {
 
     private static final Integer MIN_PRICE = 0;
     private static final Integer SOLD_OUT = 0;
+    private static final String IMAGE_URL_PREFIX = "/products/";
 
     private final Category category;
     private final Integer price;
     private final Color color;
-    private final LocalDateTime registeredAt;
 
     private Integer id;
     private String name;
@@ -25,7 +21,7 @@ public class Product {
     private String imageUrl;
     private Boolean isMade;
 
-    public Product(Integer id, String name, Category category, Integer price, Color color, Integer stock, Boolean isMade, LocalDateTime registeredAt, String imageUrl) {
+    public Product(Integer id, String name, Category category, Integer price, Color color, Integer stock, Boolean isMade, String imageUrl) {
         validateName(name);
         validatePrice(price);
         validateStock(stock);
@@ -36,16 +32,11 @@ public class Product {
         this.color = color;
         this.stock = stock;
         this.isMade = isMade;
-        this.imageUrl = imageUrl;
-        this.registeredAt = registeredAt;
+        this.imageUrl = setImageUrl(imageUrl);
     }
 
     public Product(String name, Category category, Integer price, Color color, Integer stock, Boolean isMade, String imageUrl) {
-        this(null, name, category, price, color, stock, isMade, ZonedDateTime.now(
-                        ZoneId.of("Asia/Seoul"))
-                .toLocalDateTime()
-                .truncatedTo(
-                        ChronoUnit.SECONDS), imageUrl);
+        this(null, name, category, price, color, stock, isMade, imageUrl);
     }
 
     public Boolean isSoldOut() {
@@ -84,10 +75,6 @@ public class Product {
         return stock;
     }
 
-    public LocalDateTime getRegisteredAt() {
-        return registeredAt;
-    }
-
     public void changeName(String newName) {
         validateName(newName);
         this.name = newName;
@@ -116,7 +103,6 @@ public class Product {
         return category == product.category
                 && Objects.equals(price, product.price)
                 && color == product.color
-                && Objects.equals(registeredAt, product.registeredAt)
                 && Objects.equals(id, product.id)
                 && Objects.equals(name, product.name)
                 && Objects.equals(stock, product.stock)
@@ -126,7 +112,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, price, color, registeredAt, id, name, stock, imageUrl, isMade);
+        return Objects.hash(category, price, color, id, name, stock, imageUrl, isMade);
     }
 
     private void validatePrice(Integer price) {
@@ -149,5 +135,9 @@ public class Product {
 
     private boolean isIdNotNull() {
         return id != null;
+    }
+
+    private String setImageUrl(String input){
+        return IMAGE_URL_PREFIX + input;
     }
 }

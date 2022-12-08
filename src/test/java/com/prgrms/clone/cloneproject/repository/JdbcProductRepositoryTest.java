@@ -2,9 +2,9 @@ package com.prgrms.clone.cloneproject.repository;
 
 import com.prgrms.clone.cloneproject.TestConfig;
 import com.prgrms.clone.cloneproject.product.domain.Product;
-import com.prgrms.clone.cloneproject.product.repository.JdbcProductRepository;
 import com.prgrms.clone.cloneproject.product.domain.util.Category;
 import com.prgrms.clone.cloneproject.product.domain.util.Color;
+import com.prgrms.clone.cloneproject.product.repository.JdbcProductRepository;
 import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.config.MysqldConfig;
 import org.junit.jupiter.api.*;
@@ -44,7 +44,7 @@ class JdbcProductRepositoryTest {
                 .withTimeZone("Asia/Seoul")
                 .build();
         embeddedMysql = anEmbeddedMysql(mysqldConfig)
-                .addSchema("shop", classPathScript("product.sql"))
+                .addSchema("shop", classPathScript("schema.sql"))
                 .start();
 
 
@@ -52,7 +52,7 @@ class JdbcProductRepositoryTest {
 
     @AfterEach
     void clean() {
-        embeddedMysql.reloadSchema("shop", classPathScript("product.sql"));
+        embeddedMysql.reloadSchema("shop", classPathScript("schema.sql"));
     }
 
     @AfterAll

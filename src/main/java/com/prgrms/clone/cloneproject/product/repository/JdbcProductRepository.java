@@ -15,8 +15,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.text.MessageFormat;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Repository
@@ -35,17 +33,13 @@ public class JdbcProductRepository implements ProductRepository {
         Integer price = resultSet.getInt("price");
         String color = resultSet.getString("color");
         Integer stock = resultSet.getInt("stock");
-        LocalDateTime registeredAt = resultSet.getTimestamp("registered_at")
-                .toLocalDateTime()
-                .truncatedTo(
-                        ChronoUnit.SECONDS);
         Boolean isMade = resultSet.getBoolean("is_made");
         String imageUrl = resultSet.getString("image_url");
 
         try {
             return new Product(id, name,
                     Category.valueOf(category), price,
-                    Color.valueOf(color), stock, isMade, registeredAt, imageUrl);
+                    Color.valueOf(color), stock, isMade, imageUrl);
         } catch (IllegalArgumentException illegalArgumentException) {
             String errorDetail = MessageFormat.format("결과를 가져올수 없습니다. 값들을 [id: {0}, name: {1}, category: {2}, price: {3}, color: {4}, stock: {5}] 확인해주세요.",
                     id, name, category, price, color, stock);
@@ -61,7 +55,6 @@ public class JdbcProductRepository implements ProductRepository {
                 "category", product.getCategory().name(),
                 "color", product.getColor().name(),
                 "stock", product.getStock(),
-                "registered_at", product.getRegisteredAt(),
                 "image_url", product.getImageUrl(),
                 "is_made", product.getIsMade()
         );
@@ -74,7 +67,6 @@ public class JdbcProductRepository implements ProductRepository {
                 .addValue("category", product.getCategory().name())
                 .addValue("color", product.getColor().name())
                 .addValue("stock", product.getStock())
-                .addValue("registered_at", product.getRegisteredAt())
                 .addValue("image_url", product.getImageUrl())
                 .addValue("is_made", product.getIsMade());
 

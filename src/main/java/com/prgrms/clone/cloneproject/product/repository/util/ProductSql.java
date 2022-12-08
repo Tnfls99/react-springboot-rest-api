@@ -2,7 +2,7 @@ package com.prgrms.clone.cloneproject.product.repository.util;
 
 public class ProductSql {
 
-    private static final String INSERT = "INSERT INTO product(name, price, category, color, stock, registered_at, is_made, image_url) VALUES (:name, :price, :category, :color, :stock, :registered_at, :is_made, :image_url)";
+    private static final String INSERT = "INSERT INTO product(name, price, category, color, stock, is_made, image_url) VALUES (:name, :price, :category, :color, :stock, :is_made, :image_url)";
     private static final String FIND_BY_ID = "SELECT * FROM product WHERE id= :id";
     private static final String FIND_ALL = "SELECT * FROM product";
     private static final String UPDATE_NAME = "UPDATE product SET name = :name WHERE id = :id";
