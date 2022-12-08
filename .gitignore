@@ -206,5 +206,6 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
-
+src/main/resources/static/products
+src/main/resources/static/as-on-logo.ico
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,macos,intellij

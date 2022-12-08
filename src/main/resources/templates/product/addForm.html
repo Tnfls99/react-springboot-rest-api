@@ -23,7 +23,8 @@
     <div class="py-5 text-center">
         <h2>< 상품 등록하기 ></h2></div>
     <h2 class="mb-3">상품 정보를 입력해주세요! ଘ(੭ˊᵕˋ)੭* ੈ✩‧₊˚</h2>
-    <p>모든 입력 정보를 입력하셔야 상품이 정상적으로 등록됩니다!</p>
+    <p th:if="${(param.error != null)}" th:text="${param.error}"></p>
+        <p th:if="${(param.error == null)}">모든 입력 정보를 입력하셔야 상품이 정상적으로 등록됩니다!</p>
     <hr class="my-4">
     <form action="list.html" th:action th:object="${productDTO}" method="post">
         <div>
@@ -92,10 +93,10 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <input type="radio" name="is_made" value="true" th:field="*{isMade}">TRUE
+                        <input type="radio" name="is_made" value=true th:field="*{isMade}" th:value="${true}">TRUE
                     </div>
                     <div class="col-3">
-                        <input type="radio" name="is_made" value="false" th:field="*{isMade}">FALSE
+                        <input type="radio" name="is_made" value=false th:field="*{isMade}" th:value="${false}">FALSE
                     </div>
                 </div>
             </div>
