@@ -90,7 +90,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
         int update = namedParameterJdbcTemplate.update(
                 CustomerSql.getInsertQuery(), createSqlParaMap(customer), generatedKeyHolder, new String[]{"id"});
         if (update != UPDATE_SUCCESS) {
-            throw new IllegalStateException("내부 문제 발생으로 상품을 등록할 수 없습니다.");
+            throw new IllegalStateException("내부 문제 발생으로 고객을 등록할 수 없습니다.");
         }
         Integer key = Objects.requireNonNull(generatedKeyHolder.getKey()).intValue();
         customer.setId(key);
@@ -147,10 +147,11 @@ public class JdbcCustomerRepository implements CustomerRepository {
     }
 
     public Boolean isRegisteredUser(String email) {
-        int count = namedParameterJdbcTemplate.queryForObject(
-                CustomerSql.getCountUserQuery(), Collections.singletonMap("email", email), Integer.class
+        Integer count = namedParameterJdbcTemplate.queryForObject(
+                CustomerSql.getCountUserQuery(),
+                Collections.singletonMap("email", email), Integer.class
         );
 
-        return count != NO_USER;
+        return !Objects.equals(count, NO_USER);
     }
 }
