@@ -1,42 +1,35 @@
 package com.prgrms.clone.cloneproject.order.domain;
 
+import com.prgrms.clone.cloneproject.customer.domain.CartItem;
+
 import java.util.List;
 
 public class OrderDTO {
-    private String address;
-    private String email;
-    private List<OrderItem> orderItems;
+
+    private Integer customerId;
+    private List<CartItem> orderItems;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(String address, String email, List<OrderItem> orderItems) {
-        this.address = address;
-        this.email = email;
+    public OrderDTO(Integer customerId, List<CartItem> orderItems) {
+        this.customerId = customerId;
         this.orderItems = orderItems;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<OrderItem> getOrderItems() {
+    public List<CartItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
+    public void setOrderItems(List<CartItem> orderItems) {
         this.orderItems = orderItems;
     }
 }
