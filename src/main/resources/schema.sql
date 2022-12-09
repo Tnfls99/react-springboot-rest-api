@@ -27,10 +27,11 @@ CREATE TABLE product
 CREATE TABLE orders
 (
     id           INTEGER unsigned PRIMARY KEY auto_increment,
-    email        VARCHAR(50)  NOT NULL,
-    address      text NOT NULL,
-    order_status VARCHAR(50)  NOT NULL
+    customer_id     INTEGER unsigned not null ,
+    order_status VARCHAR(50)  NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
+
 
 CREATE TABLE order_items
 (
@@ -55,6 +56,7 @@ CREATE TABLE cart_items
     id INTEGER unsigned not null PRIMARY KEY AUTO_INCREMENT,
     cart_id INTEGER unsigned not null ,
     product_id INTEGER unsigned not null ,
+    price INTEGER not null ,
     quantity INTEGER unsigned not null ,
     FOREIGN KEY (cart_id) REFERENCES cart (id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES product (id)

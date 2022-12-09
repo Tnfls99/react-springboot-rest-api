@@ -6,17 +6,19 @@ public class CartItem {
     private Integer id;
     private final Integer cartId;
     private final Integer productId;
-    private final Integer quantity;
+    private final Integer price;
+    private Integer quantity;
 
-    public CartItem(Integer id, Integer cartId, Integer productId, Integer quantity) {
+    public CartItem(Integer id, Integer cartId, Integer productId, Integer price, Integer quantity) {
         this.id = id;
         this.cartId = cartId;
         this.productId = productId;
+        this.price = price;
         this.quantity = quantity;
     }
 
-    public CartItem(Integer cartId, Integer productId, Integer quantity) {
-        this(null, cartId, productId, quantity);
+    public CartItem(Integer cartId, Integer productId, Integer quantity, Integer price) {
+        this(null, cartId, productId, price, quantity);
     }
 
     public Integer getId() {

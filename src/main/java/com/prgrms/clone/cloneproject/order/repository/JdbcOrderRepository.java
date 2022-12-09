@@ -30,8 +30,8 @@ public class JdbcOrderRepository implements OrderRepository {
     private static Map<String, Object> createOrderParamMap(Order order) {
         return Map.of(
                 "id", order.getId(),
-                "address", order.getAddress(),
-                "orderStatus", order.getOrderStatus()
+                "customer_id", order.getCustomerId(),
+                "order_status", order.getOrderStatus()
         );
     }
 
@@ -48,9 +48,8 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private static SqlParameterSource createOrderSqlParaMap(Order order) {
         return new MapSqlParameterSource()
-                .addValue("address", order.getAddress())
-                .addValue("email", order.getEmail())
-                .addValue("orderStatus", order.getOrderStatus().getStatus());
+                .addValue("customer_id", order.getCustomerId())
+                .addValue("order_status", order.getOrderStatus().getStatus());
 
     }
 
@@ -65,15 +64,14 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private final RowMapper<Order> OrderRowMapper = (resultSet, i) -> {
         Integer id = resultSet.getInt("id");
-        String email = resultSet.getString("email");
-        String address = resultSet.getString("address");
+        Integer customerId = resultSet.getInt("customer_id");
         String orderStatus = resultSet.getString("order_status");
 
         OrderStatus status = OrderStatus.findOrderStatus(orderStatus);
 
         List<OrderItem> orderItems = findOrderItems(id);
 
-        return new Order(id, email, address, orderItems, status);
+        return new Order(id, customerId, orderItems, status);
     };
 
     private final RowMapper<OrderItem> OrderItemRowMapper = (resultSet, i) -> {

@@ -6,30 +6,28 @@ import java.util.List;
 
 public class Order {
     private Integer id;
-    private String email;
-    private String address;
+    private Integer customerId;
     private List<OrderItem> orderItems;
     private OrderStatus orderStatus;
 
-    public Order(Integer id, String email, String address, List<OrderItem> orderItems, OrderStatus orderStatus) {
-        this.email = email;
+    public Order(Integer id, Integer customerId, List<OrderItem> orderItems, OrderStatus orderStatus) {
         validOrderList(orderItems);
         this.id = id;
-        this.address = address;
+        this.customerId = customerId;
         this.orderItems = orderItems;
         this.orderStatus = orderStatus;
     }
 
-    public Order(String address, List<OrderItem> orderItems, OrderStatus orderStatus, String email) {
-        this(null, email, address, orderItems, orderStatus);
+    public Order(Integer customerId, List<OrderItem> orderItems, OrderStatus orderStatus) {
+        this(null, customerId, orderItems, orderStatus);
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
     public List<OrderItem> getOrderItems() {
@@ -38,10 +36,6 @@ public class Order {
 
     public OrderStatus getOrderStatus() {
         return orderStatus;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     private void validOrderList(List<OrderItem> productList) {

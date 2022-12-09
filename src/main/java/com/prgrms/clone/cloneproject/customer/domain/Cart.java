@@ -21,8 +21,8 @@ public class Cart {
         this(null, customerId, new ArrayList<>());
     }
 
-    public void add(Integer productId, Integer quantity) {
-        this.cartItems.add(new CartItem(id, productId, quantity));
+    public void add(Integer productId, Integer quantity, Integer price) {
+        this.cartItems.add(new CartItem(id, productId, quantity, price));
     }
 
     public void deleteProduct(CartItem cartItem) {

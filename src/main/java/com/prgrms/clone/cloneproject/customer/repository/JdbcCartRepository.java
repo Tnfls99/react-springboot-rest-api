@@ -44,15 +44,17 @@ public class JdbcCartRepository implements CartRepository {
         Integer id = resultSet.getInt("id");
         Integer cartId = resultSet.getInt("cart_id");
         Integer productId = resultSet.getInt("product_id");
+        Integer price = resultSet.getInt("price");
         Integer quantity = resultSet.getInt("quantity");
 
-        return new CartItem(id, cartId, productId, quantity);
+        return new CartItem(id, cartId, productId, price, quantity);
     };
 
-    private static SqlParameterSource createSqlParaMap(CartItem cartItem){
+    private static SqlParameterSource createSqlParaMap(CartItem cartItem) {
         return new MapSqlParameterSource()
                 .addValue("cart_id", cartItem.getCartId())
                 .addValue("product_id", cartItem.getProductId())
+                .addValue("price", cartItem.getPrice())
                 .addValue("quantity", cartItem.getQuantity());
     }
 
