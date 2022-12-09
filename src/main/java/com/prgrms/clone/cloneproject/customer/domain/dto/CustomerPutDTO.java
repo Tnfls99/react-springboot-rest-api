@@ -1,4 +1,4 @@
-package com.prgrms.clone.cloneproject.customer.domain;
+package com.prgrms.clone.cloneproject.customer.domain.dto;
 
 import org.springframework.lang.Nullable;
 

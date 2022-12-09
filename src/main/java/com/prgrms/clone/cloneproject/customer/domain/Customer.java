@@ -12,14 +12,12 @@ public class Customer {
     private String name;
     private String email;
     private String address;
-    private Cart cart;
 
     public Customer(Integer id, String name, String email) {
         validateEmail(email);
         this.id = id;
         this.name = name;
         this.email = email;
-        this.cart = new Cart(id);
     }
 
     public Customer(String name, String email) {
@@ -32,7 +30,6 @@ public class Customer {
         this.name = name;
         this.email = email;
         this.address = address;
-        this.cart = new Cart(id);
     }
 
     public Customer(String name, String email, String address){
@@ -53,10 +50,6 @@ public class Customer {
 
     public String getAddress() {
         return address;
-    }
-
-    public Cart getCart() {
-        return cart;
     }
 
     public void changeName(String newName){

@@ -40,11 +40,15 @@ public class Cart {
         return customerId;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer generatedId) {
         if (id != BEFORE_INSERT) {
             throw new IllegalArgumentException("id 값은 변경할 수 없습니다.");
         }
-        this.id = id;
+        this.id = generatedId;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     private boolean isNotContain(CartItem cartItem) {

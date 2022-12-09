@@ -1,5 +1,7 @@
 package com.prgrms.clone.cloneproject.product.controller;
 
+import com.prgrms.clone.cloneproject.customer.domain.dto.CartItemDTO;
+import com.prgrms.clone.cloneproject.order.domain.OrderPostDTO;
 import com.prgrms.clone.cloneproject.product.domain.Product;
 import com.prgrms.clone.cloneproject.product.domain.ProductPutDTO;
 import com.prgrms.clone.cloneproject.product.service.ProductProvider;
@@ -10,9 +12,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+
+import static com.prgrms.clone.cloneproject.customer.service.CustomerProvider.isValidCustomer;
 
 @RestController
 @RequestMapping("/shop")
@@ -57,5 +62,38 @@ public class ProductController {
         headers.setLocation(location);
 
         return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).headers(headers).body("상품 이름이 변경되었습니다.");
+    }
+
+    @PostMapping("/products/{productId}/cart")
+    public ResponseEntity addProductToCart(@RequestBody CartItemDTO cartItemDTO,
+                                           UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) {
+        Integer customerId = request.getIntHeader("customerId");
+
+        isValidCustomer(customerId);
+
+        URI location = uriComponentsBuilder.path("/shop/customers/{customerId}/cart/new")
+                .buildAndExpand(customerId).toUri();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+
+        return ResponseEntity.status(HttpStatus.PERMANENT_REDIRECT).headers(headers).body(cartItemDTO);
+    }
+
+    @PostMapping("/products/{productId}/order")
+    public ResponseEntity addProductToOrder(@RequestBody OrderPostDTO orderPostDTO,
+                                            UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) {
+
+        Integer customerId = request.getIntHeader("customerId");
+
+        isValidCustomer(customerId);
+
+        URI location = uriComponentsBuilder.path("/shop/orders/new")
+                .buildAndExpand().toUri();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+
+        return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).headers(headers).body(orderPostDTO);
     }
 }

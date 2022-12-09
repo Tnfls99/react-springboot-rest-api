@@ -1,14 +1,18 @@
 package com.prgrms.clone.cloneproject.order.service;
 
+import com.prgrms.clone.cloneproject.customer.domain.dto.CartDTO;
+import com.prgrms.clone.cloneproject.customer.domain.dto.CartItemDTO;
+import com.prgrms.clone.cloneproject.customer.exception.NoAuthenticatedException;
 import com.prgrms.clone.cloneproject.order.domain.Order;
-import com.prgrms.clone.cloneproject.order.domain.OrderDTO;
 import com.prgrms.clone.cloneproject.order.domain.OrderItem;
 import com.prgrms.clone.cloneproject.order.domain.OrderPostDTO;
 import com.prgrms.clone.cloneproject.order.domain.util.OrderStatus;
 import com.prgrms.clone.cloneproject.order.repository.JdbcOrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OrderProvider {
@@ -58,5 +62,19 @@ public class OrderProvider {
             throw new IllegalArgumentException("상품 없이 주문이 불가능합니다.");
         }
 
+        List<OrderItem> orderItems = cartItems.stream()
+                .map(cartItem ->
+                        new OrderItem(
+                                cartItem.getProductId(),
+                                cartItem.getPrice(),
+                                cartItem.getQuantity()))
+                .toList();
 
+        Order order = new Order(customerId,
+                orderItems, OrderStatus.BEFORE_DEPOSIT);
+
+        orderRepository.insert(order);
+
+        return order;
+    }
 }

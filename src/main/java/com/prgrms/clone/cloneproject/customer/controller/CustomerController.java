@@ -54,4 +54,39 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).headers(headers).body("정보가 변경되었습니다.");
     }
 
+    @GetMapping("/{customerId}/cart")
+    public ResponseEntity cart(@PathVariable Integer customerId){
+        Cart cart = customerProvider.findCart(customerId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(cart);
+    }
+
+    @PostMapping("/{customerId}/cart/new")
+    public ResponseEntity addProduct(@PathVariable Integer customerId, @RequestBody CartItemDTO cartItemDTO, UriComponentsBuilder uriComponentsBuilder){
+        customerProvider.addProductToCart(cartItemDTO, customerId);
+
+        URI location = uriComponentsBuilder.path("/shop/customers/{customerId}/cart")
+                .buildAndExpand(customerId).toUri();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+
+        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).headers(headers).body("장바구니에 상품을 추가합니다.");
+    }
+
+    @PostMapping("/{customerId}/cart")
+    public ResponseEntity createOrderByCart(@RequestBody CartDTO cartDTO, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request){
+        Integer customerId = request.getIntHeader("customerId");
+
+        isValidCustomer(customerId);
+
+        URI location = uriComponentsBuilder.path("/shop/customers/{customerId}/cart/order")
+                .buildAndExpand(customerId).toUri();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+
+        return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).headers(headers).build();
+    }
+
 }
