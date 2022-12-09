@@ -45,7 +45,9 @@ public class ProductController {
     }
 
     @PutMapping("/products/{productId}")
-    public ResponseEntity updateProductName(@RequestBody @Valid ProductPutDTO productPutDTO, @PathVariable Integer productId, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity updateProduct(@RequestBody @Valid ProductPutDTO productPutDTO, @PathVariable Integer productId,
+                                        UriComponentsBuilder uriComponentsBuilder) {
+
         productProvider.update(productId, productPutDTO);
 
         URI location = uriComponentsBuilder.path("/shop/products/{productId}")
