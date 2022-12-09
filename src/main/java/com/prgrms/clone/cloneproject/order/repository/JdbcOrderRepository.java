@@ -4,6 +4,9 @@ import com.prgrms.clone.cloneproject.order.domain.Order;
 import com.prgrms.clone.cloneproject.order.domain.OrderItem;
 import com.prgrms.clone.cloneproject.order.domain.util.OrderStatus;
 import com.prgrms.clone.cloneproject.order.repository.util.OrderSql;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,6 +18,8 @@ import java.util.*;
 
 @Repository
 public class JdbcOrderRepository implements OrderRepository {
+
+    private static final Logger logger = LoggerFactory.getLogger(JdbcOrderRepository.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final GeneratedKeyHolder generatedOrderKeyHolder;
@@ -38,8 +43,8 @@ public class JdbcOrderRepository implements OrderRepository {
     private static Map<String, Object> createOrderItemParamMap(Integer orderId, OrderItem orderItem) {
         return Map.of(
                 "id", orderItem.getId(),
-                "orderId", orderId,
-                "productId", orderItem.getProductId(),
+                "order_id", orderId,
+                "product_id", orderItem.getProductId(),
                 "price", orderItem.getPrice(),
                 "quantity", orderItem.getQuantity()
 
@@ -55,8 +60,8 @@ public class JdbcOrderRepository implements OrderRepository {
 
     private static SqlParameterSource createOrderItemSqlParaMap(Integer orderId, OrderItem orderItem) {
         return new MapSqlParameterSource()
-                .addValue("orderId", orderId)
-                .addValue("productId", orderItem.getProductId())
+                .addValue("order_id", orderId)
+                .addValue("product_id", orderItem.getProductId())
                 .addValue("price", orderItem.getPrice())
                 .addValue("quantity", orderItem.getQuantity());
 
@@ -108,10 +113,15 @@ public class JdbcOrderRepository implements OrderRepository {
 
     @Override
     public Optional<Order> findById(Integer orderId) {
-        return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(
-                OrderSql.getOrderFindOneQuery(),
-                Collections.singletonMap("id", orderId), OrderRowMapper
-        ));
+        try{
+            return Optional.ofNullable(namedParameterJdbcTemplate.queryForObject(
+                    OrderSql.getOrderFindOneQuery(),
+                    Collections.singletonMap("id", orderId), OrderRowMapper
+            ));
+        }catch (EmptyResultDataAccessException emptyResultDataAccessException){
+            logger.info("해당 id에 해당하는 주문 정보가 없습니다.");
+        }
+        return Optional.empty();
     }
 
     private List<OrderItem> findOrderItems(Integer orderItemId) {

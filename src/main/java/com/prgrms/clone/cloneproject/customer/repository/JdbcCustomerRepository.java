@@ -50,7 +50,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
         paramMap.put("id", customer.getId());
         paramMap.put("name", customer.getName());
         paramMap.put("address", customer.getAddress());
-        paramMap.put("eamil", customer.getEmail());
+        paramMap.put("email", customer.getEmail());
 
         return Collections.unmodifiableMap(paramMap);
     }
